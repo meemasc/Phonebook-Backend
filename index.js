@@ -98,7 +98,7 @@ app.use(errorHandler)
 const ALTERNATIVE_PORT = process.env.ALTERNATIVE_PORT
 const PORT = process.env.PORT || ALTERNATIVE_PORT
 */
-const PORT = process.env.ALTERNATIVE_PORT
+const PORT = process.env.PORT || process.env.ALTERNATIVE_PORT
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`)
 })
