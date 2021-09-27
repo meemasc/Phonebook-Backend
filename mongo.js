@@ -14,9 +14,9 @@ const Person = mongoose.model('Person', personSchema)
 if (process.argv.length < 3) {
   console.log('Please provide the password as an argument: node mongo.js <password>')
   process.exit(1)
-} 
-else if (process.argv.length == 3) {
-  console.log("phonebook:")
+}
+else if (process.argv.length === 3) {
+  console.log('phonebook:')
   Person.find({}).then(result => {
     result.forEach(person => {
       console.log(`${person.name} ${person.number}`)
@@ -24,12 +24,12 @@ else if (process.argv.length == 3) {
     mongoose.connection.close()
   })
 }
-else if (process.argv.length == 5){
+else if (process.argv.length === 5){
   const person = new Person({
     name: process.argv[3],
     number: process.argv[4]
   })
-  
+
   person.save().then(result => {
     console.log(`Name: ${result.name} Number: ${result.number} added to phonebook`)
     mongoose.connection.close()
