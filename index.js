@@ -12,7 +12,7 @@ morgan.token('dataToken', (req, res) => JSON.stringify(req.body))
 app.use(morgan(':method :url :status :res[content-length] - :response-time ms :dataToken'))
 
 
-app.get('/info', (request, response) => {
+app.get('/info', (request, response, next) => {
   Person.count({}).then(personNumber => {
     response.send(`
       <p>Phonebook has info for ${personNumber} people</p>
@@ -22,14 +22,14 @@ app.get('/info', (request, response) => {
   .catch(error => next(error))
 })
 
-app.get('/api/persons', (request, response) => {
+app.get('/api/persons', (request, response, next) => {
   Person.find({}).then(persons => {
     response.json(persons)
   })
   .catch(error => next(error))
 })
 
-app.get('/api/persons/:id', (request, response) => {
+app.get('/api/persons/:id', (request, response, next) => {
   Person.findById(request.params.id).then(person => {
     if (person) {
       response.json(person)
@@ -48,7 +48,7 @@ app.delete('/api/persons/:id', (request, response, next) => {
     .catch(error => next(error))
 })
 
-app.post('/api/persons', (request, response) => {
+app.post('/api/persons', (request, response, next) => {
   const body = request.body
 
   if (body.name === undefined) {
