@@ -11,7 +11,8 @@
     "deploy": "git push heroku main",
     "deploy:full": "npm run build:ui && git add . && git commit -m uibuild && npm run deploy",
     "logs:prod": "heroku logs --tail",
-    "build:dev": "npm run build:ui && npm run dev"
+    "build:dev": "npm run build:ui && npm run dev",
+    "lint": "eslint ."
   },
   "author": "Mehmet Emin Ascioglu",
   "license": "",
@@ -24,6 +25,7 @@
     "morgan": "^1.10.0"
   },
   "devDependencies": {
+    "eslint": "^7.32.0",
     "nodemon": "^2.0.12"
   }
 }
