@@ -10,7 +10,8 @@
     "build:ui": "rm -rf build && cd C:/Users/Memin/Documents/GitHub/Fullstack-Open/part2/thephonebook/ && npm run build --prod && cp -r build C:/Users/Memin/Documents/GitHub/Phonebook-backend",
     "deploy": "git push heroku main",
     "deploy:full": "npm run build:ui && git add . && git commit -m uibuild && npm run deploy",
-    "logs:prod": "heroku logs --tail"
+    "logs:prod": "heroku logs --tail",
+    "build:dev": "npm run build:ui && npm run dev"
   },
   "author": "Mehmet Emin Ascioglu",
   "license": "",
@@ -19,6 +20,7 @@
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "mongoose": "^6.0.7",
+    "mongoose-unique-validator": "^2.0.3",
     "morgan": "^1.10.0"
   },
   "devDependencies": {

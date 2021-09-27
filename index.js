@@ -52,7 +52,7 @@ app.post('/api/persons', (request, response, next) => {
   const body = request.body
 
   if (body.name === undefined) {
-    return response.status(400).json({ error: 'content missing' })
+    return response.status(400).json({ error: 'name missing' })
   }
 
   const person = new Person({
@@ -74,7 +74,7 @@ app.put('/api/persons/:id', (request, response, next) => {
     number: body.number,
   }
 
-  Person.findByIdAndUpdate(request.params.id, person, { new: true })
+  Person.findByIdAndUpdate(request.params.id, person, { new: true, runValidators: true })
     .then(updatedNote => {
       response.json(updatedNote)
     })
