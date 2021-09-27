@@ -19,12 +19,14 @@ app.get('/info', (request, response) => {
       <p> ${Date()} </p>
     `)
   })
+  .catch(error => next(error))
 })
 
 app.get('/api/persons', (request, response) => {
   Person.find({}).then(persons => {
     response.json(persons)
   })
+  .catch(error => next(error))
 })
 
 app.get('/api/persons/:id', (request, response) => {
@@ -35,6 +37,7 @@ app.get('/api/persons/:id', (request, response) => {
       response.status(404).end()
     }
   })
+  .catch(error => next(error))
 })
 
 app.delete('/api/persons/:id', (request, response, next) => {
@@ -60,6 +63,7 @@ app.post('/api/persons', (request, response) => {
   person.save().then(savedPerson => {
     response.json(savedPerson)
   })
+  .catch(error => next(error))
 })
 
 app.put('/api/persons/:id', (request, response, next) => {
@@ -80,6 +84,7 @@ app.put('/api/persons/:id', (request, response, next) => {
 const unknownEndpoint = (request, response) => {
   response.status(404).send({ error: 'unknown endpoint' })
 }
+
 app.use(unknownEndpoint)
 
 const errorHandler = (error, request, response, next) => {
@@ -94,10 +99,7 @@ const errorHandler = (error, request, response, next) => {
 
 app.use(errorHandler)
 
-/*
-const ALTERNATIVE_PORT = process.env.ALTERNATIVE_PORT
-const PORT = process.env.PORT || ALTERNATIVE_PORT
-*/
+
 const PORT = process.env.PORT || process.env.ALTERNATIVE_PORT
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`)
